@@ -10,15 +10,10 @@ pipeline {
         } 
       }
      stage('deployOnQA'){
-      agent {
-        label 'QA'
-        }
        steps{
-        dir('/root/wars'){
-          sh 'aws s3 cp s3://arpan-deploy/Container/ . --recursive'
-           sh 'docker-compose up -d --scale tomcat=2'
-        }
-      } 
+          build job: "DeployQA"
+       } 
     }
   }
 }
+
