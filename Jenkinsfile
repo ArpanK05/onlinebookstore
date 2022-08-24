@@ -1,18 +1,17 @@
-pipeline { 
-  agent {
-    label 'built-in'
+pipeline{
+  agent{
+   node {
+      label 'built-in'
+      customWorkspace '/root/repo'
+    }
   }
-  stages { 
-    stage('build-code') { 
-      steps { 
-        sh 'mvn clean package' 
-        sh 'aws s3 cp ./target/onlinebookstore*.war s3://arpan-deploy/Container/'
-        } 
+  stages{
+    stage('Build-Code'){
+      steps{
+        sh 'mvn clean package'
+        sh 'aws s3 cp ./target/*.war s3://apran-deploy/master/'
+        }
       }
-     stage('deployOnQA'){
-       steps{
-          build job: "DeployQA"
-       } 
     }
   }
 }
