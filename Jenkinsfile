@@ -1,25 +1,17 @@
 pipeline{
-  agent{
-   node {
-      label 'built-in'
-      customWorkspace '/root/repo'
-    }
-  }
-  stages{
-    stage('Build-Code'){
-      steps{
-        sh 'mvn clean package'
-        sh 'aws s3 cp ./target/*.war s3://arpan-deploy/master/'
-      }
-    }
-  stage('build-parallel'){
-    parallel{
-        stage('deployUsingDocker'){
-          steps{
-            build 'deployUsingDocker'
-          }
-        }
-      }
-    }
-  }
+	agent{
+		label 'IAMOPS'
+		customWorkspace '/root/project/'
+	}
+
+	stages{
+		stage('build-deploy-app'){
+			steps{
+				sh 'mvn clean install'
+				sh 'cp ./onlinebookstore/target/*.war /root/apache-tomcat-9.0.65/webapps/'
+				sh 'cd /root/apache-tomcat-9.0.65/bin && ./startup.sh'
+
+			}
+		}
+	}
 }
