@@ -1,7 +1,9 @@
 pipeline{
 	agent{
-		label 'iamops'
-		customWorkspace '/root/project/'
+		node{
+			label 'iamops'
+			customWorkspace '/root/project/'
+		}
 	}
 
 	stages{
