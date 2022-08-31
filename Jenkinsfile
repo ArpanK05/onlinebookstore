@@ -1,6 +1,6 @@
 pipeline{
 	agent{
-		label 'IAMOPS'
+		label 'iamops'
 		customWorkspace '/root/project/'
 	}
 
