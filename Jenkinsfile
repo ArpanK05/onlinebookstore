@@ -1,6 +1,7 @@
 pipeline{
   agent{
    label 'built-in' 
+   customWorkspace '/root/project'
   }
   stages{
     stage('build-app'){
