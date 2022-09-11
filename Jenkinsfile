@@ -2,7 +2,7 @@ pipeline{
   agent{
     node{
       label 'built-in' 
-      customWorkspace '/root/project'
+      customWorkspace '/home/att/project'
     }
   }
   tools{
