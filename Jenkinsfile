@@ -14,5 +14,10 @@ pipeline{
         sh 'mvn clean install'
       }
     }
+    stage('ansible-deploy'){
+      steps{
+        build 'ansible-deploy' 
+      }
+    }
   }
 }
